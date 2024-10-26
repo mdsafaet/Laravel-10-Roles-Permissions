@@ -4,7 +4,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
            Permissions/Edit
         </h2>
-        <a href="{{route('permissions.update',$permission->id)}}" class="bg-slate-700 text-sm rounded-md px-5 py-3 text-white">back</a>
+        <a href="{{route('permissions.index')}}" class="bg-slate-700 text-sm rounded-md px-5 py-3 text-white">back</a>
     </div>
     </x-slot>
 
@@ -14,7 +14,7 @@
                 <div class="p-6 text-gray-900">
 
                                                        <!-- Form to Create a Permission -->
-                    <form action="{{ route('permissions.store') }}" method="POST">
+                    <form action="{{ route('permissions.update',$permission->id) }}" method="POST">
                         @csrf
                         <div class="mb-4">
                             <label  class="text-lg font-medium">Name:</label>

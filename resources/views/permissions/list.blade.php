@@ -11,7 +11,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <x-message> </x-message>
+            <x-message />
 
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>

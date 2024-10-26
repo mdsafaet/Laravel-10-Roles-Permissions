@@ -11,7 +11,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-<message></message>
+            <x-message />
+
 <table class="min-w-full divide-y divide-gray-200">
     <thead>
         <tr>
@@ -44,7 +45,7 @@
   <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
     @csrf
     @method('DELETE')
-    <button type="submit" class="bg-red-600 text-sm rounded-md px-3 py-2 hover:bg-red-500" onclick="return confirm('Are you sure you want to delete this permission?')">
+    <button type="submit" class="bg-red-600 text-sm rounded-md px-3 py-2 hover:bg-red-500" onclick="return confirm('Are you sure you want to delete this Role?')">
         Delete
     </button>
 </form>
@@ -57,7 +58,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="4" class="px-6 py-4 text-center text-gray-500">No permissions found.</td>
+                <td colspan="4" class="px-6 py-4 text-center text-gray-500">No roles found.</td>
             </tr>
         @endif
     </tbody>
