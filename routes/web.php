@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Spatie\Permission\Contracts\Role;
 
 /*
@@ -55,6 +56,13 @@ Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('art
 Route::post('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
+//Users
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+//Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+//Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
+//Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
 
