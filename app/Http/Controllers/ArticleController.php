@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\HasMiddleware;
+
+use Illuminate\Support\Facades\Route;
+
 
 
 
 class ArticleController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

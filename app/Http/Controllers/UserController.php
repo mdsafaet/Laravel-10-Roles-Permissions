@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
@@ -25,7 +26,14 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+        $roles = Role::orderBy('name', 'ASC')->get();
+
+        return view('users.create',[
+
+        'roles'=>$roles,
+
+        ]);
     }
 
     /**
@@ -33,7 +41,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $validator=Validator::make($request->all(), [
+        'name'=>'required|min:3',
+        'email'=>"required|email|unique:users,email",
+        "password"=> "required|min:3|same:confirm_password",
+        'confirm_password'=>'required'
+
+        ]);
+
+if($validator->fails()){
+
+return redirect()->route('users.create')->withInput()->withErrors($validator);
+}
+$user= new User();
+$user->name=$request->name;
+$user->email=$request->email;
+$user->password=Hash::make($request->password) ;
+$user->save();
+
+$user->syncRoles($request->role);
+
+return redirect()->route('users.index')->with('USer Created');
+
     }
 
     /**
@@ -70,7 +101,7 @@ class UserController extends Controller
 
         $validator=Validator::make($request->all(), [
         'name'=>'required|min:3',
-        'email'=>'required|email|unique:users,email,'.$id.',id'
+        'email'=>"required|email|unique:users,email,{$id},id"
         ]);
 
 if($validator->fails()){
@@ -92,6 +123,11 @@ return redirect()->route('users.index')->with('Updated');
      */
     public function destroy(string $id)
     {
-        //
+
+
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'Article deleted successfully.');
     }
 }
