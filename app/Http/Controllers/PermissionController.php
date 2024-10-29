@@ -11,11 +11,19 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-    //this method will show the permission page
+
+    public function __construct()
+    {
+        // Apply permissions with correct syntax
+        $this->middleware(['permission:View Permissions'], ['only' => ['index']]);
+        $this->middleware(['permission:Edit Permissions'], ['only' => ['edit']]);
+        $this->middleware(['permission:	Create Permissions'], ['only' => ['create']]);
+        $this->middleware(['permission:Delete Permissions'], ['only' => ['destroy']]);
+    }
 
     public function index(){
 
-        $permissions = Permission::orderby('created_at', 'DESC')->paginate(5);
+        $permissions = Permission::orderby('created_at', 'DESC')->paginate(10);
         return view('permissions.list',[
             'permissions'=> $permissions
 

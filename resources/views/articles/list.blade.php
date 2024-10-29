@@ -35,7 +35,12 @@
                                 <td class="px-6 py-4">{{ \Carbon\Carbon::parse($article->created_at)->format('d M, Y') }}</td>
                                 <td class="px-6 py-4">
                                     <div class="flex space-x-2">
+
+                                        @can('Edit Article')
                                         <a href="{{ route('articles.edit', $article->id) }}" class="bg-slate-700 text-sm rounded-md px-3 py-2 hover:bg-slate-600">Edit</a>
+                                        @endcan
+
+                                      @can('Delete Article')
                                         <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -43,7 +48,7 @@
                                                 Delete
                                             </button>
                                         </form>
-
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
-use Illuminate\Support\Facades\Route;
-
-
-
-
 class ArticleController extends Controller
 {
-
+    public function __construct()
+    {
+        // Apply permissions with correct syntax
+        $this->middleware(['permission:View Article'], ['only' => ['index']]);
+        $this->middleware(['permission:	Edit Article'], ['only' => ['edit']]);
+        $this->middleware(['permission:Create Article'], ['only' => ['create']]);
+        $this->middleware(['permission:Delete Article'], ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

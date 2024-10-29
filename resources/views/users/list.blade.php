@@ -44,8 +44,13 @@
                         <!-- Edit Button -->
                         <div class="flex space-x-2">
                             <!-- Edit Button -->
+@can('Edit Users')
+
+
                             <a href="{{ route('users.edit', $user->id) }}" class="bg-slate-700 text-sm rounded-md px-3 py-2 hover:bg-slate-600">Edit</a>
+                            @endcan
   <!-- Delete Button (Form) -->
+  @can('Delete Users')
   <form action="{{ route('users.destroy', $user->id) }}" method="POST">
     @csrf
     @method('DELETE')
@@ -53,6 +58,7 @@
         Delete
     </button>
 </form>
+@endcan
 
 
 

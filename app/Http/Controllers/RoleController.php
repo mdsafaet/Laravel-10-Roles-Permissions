@@ -13,9 +13,17 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        // Apply permissions with correct syntax
+        $this->middleware(['permission:View Roles'], ['only' => ['index']]);
+        $this->middleware(['permission:Edit Roles'], ['only' => ['edit']]);
+        $this->middleware(['permission:Create Roles'], ['only' => ['create']]);
+        $this->middleware(['permission:Delete Roles'], ['only' => ['destroy']]);
+    }
     public function index(){
 
-        $roles = Role::orderby('created_at', 'DESC')->paginate(5);
+        $roles = Role::orderby('created_at', 'DESC')->paginate(10);
         return view('roles.list',[
             'roles'=> $roles
 
